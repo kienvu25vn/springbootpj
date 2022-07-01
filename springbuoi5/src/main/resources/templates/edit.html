@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit User</h1>
+    <form th:action="@{/edit}" th:object="${user}" th:method="put">
+        <input type="hidden" th:field="*{id}">
+        <label>Username:</label>
+        <input type="text" th:field="*{username}">
+        <br>
+
+        <label>Email:</label>
+        <input type="text" th:field="*{email}">
+        <br>
+
+        <label>Birthday:</label>
+        <input type="text" th:field="*{birthday}">
+        <br>
+
+        <br>
+        <button type="submit">Edit</button>
+        <button><a th:href="@{/back}">Back</a></button>
+    </form>
+</body>
+</html>

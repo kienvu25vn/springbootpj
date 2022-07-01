@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <style>
+        table , tr , td {
+            border: 1px solid black;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+        <script>
+            function deleteJs(){
+                if(confirm("Do you want to delete this user!") == false){
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+
+        </script>
+        <h1>List User</h1>
+        <form th:action="@{/search}" method="post">
+            <label>Search:</label>
+            <input type="text" name="username">
+            <button type="submit">Search</button>
+        </form>
+        <br>
+
+        <table th:colspan="2">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Username</td>
+                    <td>Email</td>
+                    <td>Birthday</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.username}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.birthday}"></td>
+
+                    <td>
+                        <button><a th:href="@{/edit(id = ${user.id})}">Edit</a></button>
+                    </td>
+
+                    <td>
+                        <form th:action="@{/delete(id = ${user.id})}" th:method="delete" onsubmit="return deleteJs()">
+                            <input type="submit" value="Delete" >
+                        </form>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <button>
+            <a th:href="@{/add}">Add</a>
+        </button>
+
+</body>
+</html>
